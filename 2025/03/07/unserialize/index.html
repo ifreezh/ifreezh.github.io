@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Archives | 政宗宫村</title>
+    <title>unserialize | 政宗宫村</title>
     <meta name="author" content="qfnuctfer-xiaobai" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -37,6 +37,10 @@
 
 
 <script src="/js/lib/preview.js"></script>
+
+
+
+
 
 
 
@@ -150,153 +154,45 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            
-<div id="archives">
-    
-    <div id="timeline-wrap" ref="timeline">
+            <div class="article">
+    <div>
+        <h1>unserialize</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2025/3/7
+        </span>
         
-        <div class="timeline" data-title="helloworld">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2025/2/11</div>
-                <a href="/2025/02/11/hello-world/">
-                    <h3>Hello World</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="示例文章">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2025/2/25</div>
-                <a href="/2025/02/25/mis/">
-                    <h3>示例文章</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                    <span class="tags">
-                        <span class="icon">
-                            <i class="fa-solid fa-tags fa-fw"></i>
-                        </span>
-                        
-                        
-                        <span class="tag">
-                            
-                            <a href="/tags/%E5%8E%9F%E5%88%9B/" style="color: #ffa2c4">
-                                原创
-                            </a>
-                        </span>
-                        
-                    </span>
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="test">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2025/2/26</div>
-                <a href="/2025/02/26/test/">
-                    <h3>test</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="misc">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2025/2/26</div>
-                <a href="/2025/02/26/misc-1/">
-                    <h3>misc</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="misc图片隐写">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2025/2/26</div>
-                <a href="/2025/02/26/misc%E5%9B%BE%E7%89%87%E9%9A%90%E5%86%99/">
-                    <h3>misc图片隐写</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="crypto-aes加密">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2025/2/28</div>
-                <a href="/2025/02/28/Crypto-AES%E5%8A%A0%E5%AF%86/">
-                    <h3>Crypto-AES加密</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="ctfshow-misc">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2025/3/2</div>
-                <a href="/2025/03/02/ctfshow-misc/">
-                    <h3>ctfshow-misc</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="攻防crypto">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2025/3/7</div>
-                <a href="/2025/03/07/%E6%94%BB%E9%98%B2crypto/">
-                    <h3>攻防crypto</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="unserialize">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2025/3/7</div>
-                <a href="/2025/03/07/unserialize/">
-                    <h3>unserialize</h3>
-                </a>
-                <div class="info">
-                    
-                    
-                </div>
-            </div>
-        </div>
         
     </div>
+    
+    <div class="content" v-pre>
+        <p>攻防unserialize3反序列化题目，打开网址，进行代码审计，看到wake up想到php反序列化<br>在编程中，__wakeup() 是 PHP 的一个魔术方法（magic method），用于在对象被反序列化（unserialize）时执行一些操作。它属于序列化和反序列化机制的一部分，用于确保对象在恢复状态时能够正确地初始化或执行一些必要的操作。</p>
+<ol>
+<li><p>序列化和反序列化的背景</p>
+<p> 序列化（serialize）：将对象或变量转换为字符串，以便存储或传输。<br> 反序列化（unserialize）：将序列化的字符串还原为原来的对象或变量。</p>
+</li>
+</ol>
+<p>在反序列化过程中，对象的状态需要被正确恢复。例如，对象可能需要重新连接数据库、重新初始化资源，或者更新某些属性。<br>2. __wakeup() 的作用<br>__wakeup() 方法会在对象被反序列化时自动调用。它的主要用途包括：</p>
+<pre><code>重新初始化资源：如果对象在序列化时关闭了某些资源（如文件句柄、数据库连接等），__wakeup() 可以在反序列化时重新初始化这些资源。
+清理或更新状态：对象可能需要在反序列化时清理某些临时数据，或者根据当前环境更新某些状态。
+执行安全检查：在某些情况下，__wakeup() 可以用于验证序列化的数据是否被篡改，或者执行其他安全相关的操作。
+</code></pre>
+<p>学习了一些关于wake up关于反序列化的知识，构造xctf的一个新的类，并输出其序列化的结果</p>
+<p>![]](image&#x2F;12.png)</p>
+<p>为了不执行wake up函数，将对象属性个数修改为大于1，传入code的参数即可得到结果</p>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
 </div>
 
             <footer id="footer">
@@ -327,6 +223,12 @@
         
     </div>
     <script src="/js/main.js"></script>
+    
+    
+
+
+
+
     
 </body>
 </html>
